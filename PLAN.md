@@ -2,7 +2,7 @@
 
 ## Summary
 
-This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, and an asset-free artistic direction using CSS atmosphere and inline SVG icons. The FAQ page now uses foldable disclosure rows so guests can open only the details they need.
+This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, page-specific photography, and an asset-light artistic direction using CSS atmosphere, inline SVG icons, and curated images. The FAQ page now uses foldable disclosure rows so guests can open only the details they need, and page photography is presented with a compact but aggressive gradient-based transition treatment so the images' built-in white fade dissolves into the warmer page background without reading as a border or washing out nearby text.
 
 ## Key Changes
 
@@ -10,31 +10,39 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Use `Playfair Display` for headings and `Inter` for supporting text
   - Maintain a centered column layout with restrained spacing, warm neutrals, muted coastal accents, and a lighter editorial fixed nav
   - Keep `FAQ` in the main navigation alongside `Schedule`, `Travel`, `Things to Do`, and `Registry`
-  - Continue using CSS gradients, soft decorative shapes, glassy surfaces, and inline SVG icons instead of adding local image assets
+  - Mix CSS gradients, soft decorative shapes, glassy surfaces, inline SVG icons, and curated page photography
+  - Use a shared editorial image treatment with natural image height and a compact but more aggressive white-to-transparent surround that softens the image boundary without spreading too far into nearby content
+  - Ignore `images/Torrey Pines_V.png`
 
 - Homepage:
   - Keep the landing page intentionally minimal
-  - Use a CSS-only coastal wash and layered gradients to create an artistic hero
+  - Use a coastal wash and layered gradients to create an artistic hero around the assigned `Torrey Pines.png` image
   - Present names, date, and location with a strong editorial hierarchy
+  - Place the image within the hero composition so it feels like part of the opening moment rather than a separate gallery item
+  - Apply the same compact aggressive fade-accommodation treatment used on the content pages so the image edge does not clash with the warm site background
 
 - Schedule page:
+  - Use `Darlington House.png` near the top of the page as a venue-setting image
   - Each event is a split row with a left column for title and time
   - A vertical separator sits between the left and right content on desktop
   - The right column includes venue name, full street address, a Google Maps call to action, and a short descriptive note
   - On smaller screens, the layout stacks into a single column and drops the desktop divider treatment
 
 - Travel page:
+  - Use `Harbor.png` below the page header and above the travel details as a scene-setting image
   - Keep all travel content centered in the main column
   - Use inline SVG icons for hotels, flights, and local transportation
   - Present each recommendation as a clean centered block with title, supporting details, and an external link
 
 - Things to Do page:
+  - Use `Temecula.png` near the top of the page above the category filters
   - Organize entries into `Food`, `Experiences`, and `Hikes`
   - Keep the centered filter control row at the top of the list
   - `Experiences` should explicitly include La Jolla activity suggestions such as `La Jolla Cove`, `Birch Aquarium`, and `Torrey Pines Golf Course`
   - Each recommendation remains centered and includes a title, brief description, and optional action link
 
 - FAQ page:
+  - Use `Balboa Park.png` above the disclosure list to soften the page before the text-heavy section
   - Add a dedicated FAQ page in the same editorial style as the rest of the site
   - Present questions as a centered list of foldable disclosure items, collapsed by default
   - Use a right-aligned toggle indicator styled as `<` for each row
@@ -51,11 +59,14 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - FAQ items use semantic foldable disclosure behavior with native HTML rather than JavaScript
 - Filter buttons show all items by default and allow guests to switch between `Food`, `Experiences`, and `Hikes`
 - Schedule venue blocks include external Google Maps links beneath the location name and address
+- Assigned page images are rendered with static HTML image markup and shared CSS only, using one compact but high-contrast gradient-based transition treatment across all image-bearing pages
 - All other site behavior remains static HTML and CSS with no framework, backend, or routing changes
 
 ## Test Plan
 
 - Confirm `PLAN.md` mentions all current pages, including `FAQ`, and matches the live nav structure
+- Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
+- Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
 - Confirm the Things to Do requirements explicitly mention the three filter categories and the `Torrey Pines Golf Course` entry under `Experiences`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
@@ -65,5 +76,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 - FAQ disclosure behavior should be implemented with semantic HTML and CSS rather than custom JavaScript
 - `PLAN.md` should describe the implemented state of the site rather than future optional ideas
-- The site remains asset-free aside from Google Fonts and external destination links
+- The site now uses the provided local landscape images in `images/` plus Google Fonts and external destination links
+- The registry page remains image-free because no image was assigned to it
+- The preferred image solution is one shared compact but aggressive gradient-based transition behind images rather than padding, per-page tuning, or CSS masking
 - Existing editorial design assumptions remain in place unless superseded by the FAQ and enhanced venue-detail requirements
