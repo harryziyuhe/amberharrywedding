@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Things to Do - Amber & Harry Wedding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="site-shell">
+        <nav class="navbar" aria-label="Primary">
+            <a class="brand-link" href="index.html">Amber &amp; Harry</a>
+            <div class="nav-right">
+                <a href="schedule.html">Schedule</a>
+                <a href="travel.html">Travel</a>
+                <a class="active" href="things-to-do.html">Things to Do</a>
+                <a href="faq.html">FAQ</a>
+                <a href="registry.html">Registry</a>
+            </div>
+        </nav>
+
+        <main class="page">
+            <header class="page-header container">
+                <span class="eyebrow">Around La Jolla</span>
+                <h1>Things to Do</h1>
+                <p>
+                    If you are making a weekend of it, these are the places we would send you first for a good meal, a coastal walk, or a little time outside.
+                </p>
+            </header>
+
+            <section class="container">
+                <div class="filter-bar" aria-label="Recommendation categories">
+                    <button class="filter-button is-active" type="button" data-filter="all">All</button>
+                    <button class="filter-button" type="button" data-filter="food">Food</button>
+                    <button class="filter-button" type="button" data-filter="experiences">Experiences</button>
+                    <button class="filter-button" type="button" data-filter="hikes">Hikes</button>
+                </div>
+
+                <div class="recommendation-list" aria-live="polite">
+                    <article class="recommendation panel" data-category="food">
+                        <span class="recommendation-tag">Food</span>
+                        <h2>George's at the Cove</h2>
+                        <p>
+                            A reliable choice for a celebratory dinner with ocean views, especially if you can catch the terrace around sunset.
+                        </p>
+                        <a class="btn" href="https://www.georgesatthecove.com/" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="food">
+                        <span class="recommendation-tag">Food</span>
+                        <h2>The Cottage</h2>
+                        <p>
+                            Bright, easy brunch in the village and a good stop before a beach walk or a relaxed afternoon in town.
+                        </p>
+                        <a class="btn" href="https://www.thecottagelajolla.com/" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="experiences">
+                        <span class="recommendation-tag">Experiences</span>
+                        <h2>La Jolla Cove</h2>
+                        <p>
+                            The classic first stop: sea breeze, bright water, and enough movement around the cove to make even a short visit feel worth it.
+                        </p>
+                        <a class="btn" href="https://lajollabythesea.com/la-jolla-cove/" target="_blank" rel="noreferrer">Plan a Visit</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="experiences">
+                        <span class="recommendation-tag">Experiences</span>
+                        <h2>Birch Aquarium</h2>
+                        <p>
+                            A compact, beautifully situated aquarium that is easy to fit into a weekend itinerary and especially good for families.
+                        </p>
+                        <a class="btn" href="https://aquarium.ucsd.edu/" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="experiences">
+                        <span class="recommendation-tag">Experiences</span>
+                        <h2>Torrey Pines Golf Course</h2>
+                        <p>
+                            If you want a classic San Diego round, Torrey Pines pairs dramatic cliffside views with one of the most recognizable public courses in the country.
+                        </p>
+                        <a class="btn" href="https://www.sandiego.gov/torrey-pines" target="_blank" rel="noreferrer">Course Details</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="hikes">
+                        <span class="recommendation-tag">Hikes</span>
+                        <h2>Torrey Pines Beach Trail</h2>
+                        <p>
+                            Gentle elevation, dramatic coastline, and the kind of views that make an early morning start feel very reasonable.
+                        </p>
+                        <a class="btn" href="https://torreypine.org/trails/" target="_blank" rel="noreferrer">Trail Details</a>
+                    </article>
+
+                    <article class="recommendation panel" data-category="hikes">
+                        <span class="recommendation-tag">Hikes</span>
+                        <h2>Los Penasquitos Canyon</h2>
+                        <p>
+                            A quieter inland option with a softer landscape, shaded stretches, and a relaxed pace if you want a break from the shoreline.
+                        </p>
+                        <a class="btn" href="https://www.sandiego.gov/park-and-recreation/parks/osp/lospenasquitos" target="_blank" rel="noreferrer">Trail Details</a>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Amber &amp; Harry • Summer 2027</p>
+        </footer>
+    </div>
+
+    <script>
+        const filterButtons = document.querySelectorAll(".filter-button");
+        const recommendations = document.querySelectorAll(".recommendation");
+
+        filterButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const filter = button.dataset.filter;
+
+                filterButtons.forEach((item) => item.classList.remove("is-active"));
+                button.classList.add("is-active");
+
+                recommendations.forEach((recommendation) => {
+                    const matches = filter === "all" || recommendation.dataset.category === filter;
+                    recommendation.hidden = !matches;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
