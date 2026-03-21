@@ -7,6 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -45,8 +51,25 @@
                     <button class="filter-button" type="button" data-filter="nature">Nature</button>
                 </div>
 
-                <div class="recommendation-list" aria-live="polite">
-                    <article class="recommendation panel" data-category="eat-drink">
+            </section>
+
+            <section class="things-shell">
+                <div class="things-layout">
+                    <aside class="things-map-column" aria-label="Map of things to do">
+                        <div class="things-map-frame panel">
+                            <div id="things-map" class="things-map" aria-hidden="true"></div>
+                            <button class="map-reset-zoom" id="map-reset-zoom" type="button" hidden>Reset Zoom</button>
+                            <div class="things-map-legend" aria-label="Map legend">
+                                <span class="legend-item"><span class="legend-dot legend-dot--eat-drink"></span>Eat &amp; Drink</span>
+                                <span class="legend-item"><span class="legend-dot legend-dot--fun"></span>Fun</span>
+                                <span class="legend-item"><span class="legend-dot legend-dot--nature"></span>Nature</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <div class="things-list">
+                        <div class="recommendation-list" aria-live="polite">
+                    <article class="recommendation panel" data-id="solunto" data-category="eat-drink" data-lat="32.7236" data-lng="-117.1686">
                         <span class="recommendation-tag">Eat &amp; Drink</span>
                         <h2>Solunto Restaurant &amp; Bakery</h2>
                         <p>
@@ -55,34 +78,7 @@
                         <a class="btn" href="https://www.soluntoristoranteandbakery.com/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="eat-drink">
-                        <span class="recommendation-tag">Eat &amp; Drink</span>
-                        <h2>La Palapa Authentic Mexican Food</h2>
-                        <p>
-                            Casual, generous Mexican comfort food that makes an easy stop when you want something unfussy and deeply satisfying.
-                        </p>
-                        <a class="btn" href="https://lapalapaauthenticmexicanfood.site/" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="eat-drink">
-                        <span class="recommendation-tag">Eat &amp; Drink</span>
-                        <h2>Taste of Hunan</h2>
-                        <p>
-                            Bold regional Chinese flavors and comforting noodle and stir-fry dishes make this a strong pick when the group wants something warm and shareable.
-                        </p>
-                        <a class="btn" href="https://www.tasteofhunan.com/contact/" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="eat-drink">
-                        <span class="recommendation-tag">Eat &amp; Drink</span>
-                        <h2>Meet Fresh</h2>
-                        <p>
-                            A dessert stop for shaved ice, grass jelly, and taro-forward treats when you want something sweet in Convoy after dinner.
-                        </p>
-                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meet+Fresh+San+Diego" target="_blank" rel="noreferrer">Open Map</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="eat-drink">
+                    <article class="recommendation panel" data-id="sushi-ota" data-category="eat-drink" data-lat="32.8094" data-lng="-117.2064">
                         <span class="recommendation-tag">Eat &amp; Drink</span>
                         <h2>Sushi Ota</h2>
                         <p>
@@ -91,16 +87,16 @@
                         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sushi+Ota+San+Diego" target="_blank" rel="noreferrer">Open Map</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="eat-drink">
+                    <article class="recommendation panel" data-id="la-palapa" data-category="eat-drink" data-lat="32.8171" data-lng="-117.2196">
                         <span class="recommendation-tag">Eat &amp; Drink</span>
-                        <h2>Viet Nom</h2>
+                        <h2>La Palapa Authentic Mexican Food</h2>
                         <p>
-                            Bright Vietnamese dishes, comforting broths, and a polished casual feel make this an easy lunch or dinner recommendation near UTC.
+                            Casual, generous Mexican comfort food that makes an easy stop when you want something unfussy and deeply satisfying.
                         </p>
-                        <a class="btn" href="https://www.vietnomsd.com/" target="_blank" rel="noreferrer">Visit Website</a>
+                        <a class="btn" href="https://lapalapaauthenticmexicanfood.site/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="eat-drink">
+                    <article class="recommendation panel" data-id="wayfarer" data-category="eat-drink" data-lat="32.8091" data-lng="-117.2694">
                         <span class="recommendation-tag">Eat &amp; Drink</span>
                         <h2>Wayfarer</h2>
                         <p>
@@ -109,16 +105,7 @@
                         <a class="btn" href="https://www.wayfarerbread.com/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="eat-drink">
-                        <span class="recommendation-tag">Eat &amp; Drink</span>
-                        <h2>Poki One N Half</h2>
-                        <p>
-                            Fast, fresh poke bowls when you want something casual between activities without sacrificing the San Diego seafood mood.
-                        </p>
-                        <a class="btn" href="http://onenhalf.com" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="eat-drink">
+                    <article class="recommendation panel" data-id="raised-by-wolves" data-category="eat-drink" data-lat="32.8689" data-lng="-117.2200">
                         <span class="recommendation-tag">Eat &amp; Drink</span>
                         <h2>Raised by Wolves</h2>
                         <p>
@@ -127,7 +114,43 @@
                         <a class="btn" href="https://raisedxwolves.com/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="fun">
+                    <article class="recommendation panel" data-id="viet-nom" data-category="eat-drink" data-lat="32.8725" data-lng="-117.2110">
+                        <span class="recommendation-tag">Eat &amp; Drink</span>
+                        <h2>Viet Nom</h2>
+                        <p>
+                            Bright Vietnamese dishes, comforting broths, and a polished casual feel make this an easy lunch or dinner recommendation near UTC.
+                        </p>
+                        <a class="btn" href="https://www.vietnomsd.com/" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="poki-one-n-half" data-category="eat-drink" data-lat="32.8316" data-lng="-117.1515">
+                        <span class="recommendation-tag">Eat &amp; Drink</span>
+                        <h2>Poki One N Half</h2>
+                        <p>
+                            Fast, fresh poke bowls when you want something casual between activities without sacrificing the San Diego seafood mood.
+                        </p>
+                        <a class="btn" href="http://onenhalf.com" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="taste-of-hunan" data-category="eat-drink" data-lat="32.9150" data-lng="-117.1170">
+                        <span class="recommendation-tag">Eat &amp; Drink</span>
+                        <h2>Taste of Hunan</h2>
+                        <p>
+                            Bold regional Chinese flavors and comforting noodle and stir-fry dishes make this a strong pick when the group wants something warm and shareable.
+                        </p>
+                        <a class="btn" href="https://www.tasteofhunan.com/contact/" target="_blank" rel="noreferrer">Visit Website</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="meet-fresh" data-category="eat-drink" data-lat="32.9198" data-lng="-117.1208">
+                        <span class="recommendation-tag">Eat &amp; Drink</span>
+                        <h2>Meet Fresh</h2>
+                        <p>
+                            A dessert stop for shaved ice, grass jelly, and taro-forward treats when you want something sweet in Convoy after dinner.
+                        </p>
+                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Meet+Fresh+San+Diego" target="_blank" rel="noreferrer">Open Map</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="uss-midway" data-category="fun" data-lat="32.7137" data-lng="-117.1751">
                         <span class="recommendation-tag">Fun</span>
                         <h2>USS Midway</h2>
                         <p>
@@ -136,43 +159,7 @@
                         <a class="btn" href="https://www.midway.org/home" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="fun">
-                        <span class="recommendation-tag">Fun</span>
-                        <h2>Picnic at Calumet Park</h2>
-                        <p>
-                            One of the simplest ways to enjoy the coast: bring snacks, sit above the water, and watch surfers and sunset from Bird Rock.
-                        </p>
-                        <a class="btn" href="https://www.sandiego.gov/park-and-recreation/parks/regional/shoreline/calumet" target="_blank" rel="noreferrer">Plan a Visit</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="fun">
-                        <span class="recommendation-tag">Fun</span>
-                        <h2>Balboa Park</h2>
-                        <p>
-                            Museums, gardens, architecture, and open space all in one place, making it an easy half-day if you want variety without much planning.
-                        </p>
-                        <a class="btn" href="https://balboapark.org/" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="fun">
-                        <span class="recommendation-tag">Fun</span>
-                        <h2>San Diego Botanic Garden</h2>
-                        <p>
-                            A quieter, greener option in Encinitas with winding paths, ocean air, and enough room to spend an unhurried afternoon.
-                        </p>
-                        <a class="btn" href="https://sdbg.org/" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="fun">
-                        <span class="recommendation-tag">Fun</span>
-                        <h2>Hotel del Coronado</h2>
-                        <p>
-                            A classic Coronado stop for beach views, a historic walk through the property, and an easy excuse to linger by the water.
-                        </p>
-                        <a class="btn" href="https://www.hoteldel.com/" target="_blank" rel="noreferrer">Visit Website</a>
-                    </article>
-
-                    <article class="recommendation panel" data-category="fun">
+                    <article class="recommendation panel" data-id="old-town" data-category="fun" data-lat="32.7540" data-lng="-117.1973">
                         <span class="recommendation-tag">Fun</span>
                         <h2>Old Town San Diego</h2>
                         <p>
@@ -181,43 +168,43 @@
                         <a class="btn" href="https://www.parks.ca.gov/OldTownSanDiego" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="fun">
+                    <article class="recommendation panel" data-id="balboa-park" data-category="fun" data-lat="32.7341" data-lng="-117.1446">
                         <span class="recommendation-tag">Fun</span>
-                        <h2>Temecula Wine Country</h2>
+                        <h2>Balboa Park</h2>
                         <p>
-                            If you want a fuller day trip inland, Temecula offers vineyard views, tastings, and a slower pace away from the coast.
+                            Museums, gardens, architecture, and open space all in one place, making it an easy half-day if you want variety without much planning.
                         </p>
-                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Temecula+Wine+Country" target="_blank" rel="noreferrer">Open Map</a>
+                        <a class="btn" href="https://balboapark.org/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
-                        <span class="recommendation-tag">Nature</span>
-                        <h2>Guy Fleming Trail</h2>
+                    <article class="recommendation panel" data-id="hotel-del" data-category="fun" data-lat="32.6806" data-lng="-117.1784">
+                        <span class="recommendation-tag">Fun</span>
+                        <h2>Hotel del Coronado</h2>
                         <p>
-                            A short coastal loop with wide-open views and spring wildflowers, ideal when you want a scenic walk without committing to a long hike.
+                            A classic Coronado stop for beach views, a historic walk through the property, and an easy excuse to linger by the water.
                         </p>
-                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Guy+Fleming+Trail+La+Jolla" target="_blank" rel="noreferrer">Open Map</a>
+                        <a class="btn" href="https://www.hoteldel.com/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
-                        <span class="recommendation-tag">Nature</span>
-                        <h2>Annie's Canyon Trail</h2>
+                    <article class="recommendation panel" data-id="calumet-park" data-category="fun" data-lat="32.8204" data-lng="-117.2780">
+                        <span class="recommendation-tag">Fun</span>
+                        <h2>Picnic at Calumet Park</h2>
                         <p>
-                            A more playful trail choice with narrow sandstone walls and a climb that feels slightly adventurous without requiring a full-day outing.
+                            One of the simplest ways to enjoy the coast: bring snacks, sit above the water, and watch surfers and sunset from Bird Rock.
                         </p>
-                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Annie%27s+Canyon+Trail+Solana+Beach" target="_blank" rel="noreferrer">Open Map</a>
+                        <a class="btn" href="https://www.sandiego.gov/park-and-recreation/parks/regional/shoreline/calumet" target="_blank" rel="noreferrer">Plan a Visit</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
-                        <span class="recommendation-tag">Nature</span>
-                        <h2>Scripps Coastal Meander Trail</h2>
+                    <article class="recommendation panel" data-id="botanic-garden" data-category="fun" data-lat="33.0485" data-lng="-117.2822">
+                        <span class="recommendation-tag">Fun</span>
+                        <h2>San Diego Botanic Garden</h2>
                         <p>
-                            A beautiful bluffside walk with long Pacific views that feels especially good in the morning or just before sunset.
+                            A quieter, greener option in Encinitas with winding paths, ocean air, and enough room to spend an unhurried afternoon.
                         </p>
-                        <a class="btn" href="https://scripps.ucsd.edu/about/trail" target="_blank" rel="noreferrer">Trail Details</a>
+                        <a class="btn" href="https://sdbg.org/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
+                    <article class="recommendation panel" data-id="la-jolla-cove" data-category="nature" data-lat="32.8505" data-lng="-117.2723">
                         <span class="recommendation-tag">Nature</span>
                         <h2>La Jolla Cove</h2>
                         <p>
@@ -226,16 +213,34 @@
                         <a class="btn" href="https://www.google.com/maps/search/?api=1&query=La+Jolla+Cove" target="_blank" rel="noreferrer">Open Map</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
+                    <article class="recommendation panel" data-id="scripps-coastal-meander" data-category="nature" data-lat="32.8670" data-lng="-117.2510">
                         <span class="recommendation-tag">Nature</span>
-                        <h2>Cabrillo National Monument</h2>
+                        <h2>Scripps Coastal Meander Trail</h2>
                         <p>
-                            Worth the drive for panoramic harbor views, tidepools, and a windswept Point Loma perspective that feels distinct from La Jolla.
+                            A beautiful bluffside walk with long Pacific views that feels especially good in the morning or just before sunset.
                         </p>
-                        <a class="btn" href="https://www.nps.gov/cabr/" target="_blank" rel="noreferrer">Visit Website</a>
+                        <a class="btn" href="https://scripps.ucsd.edu/about/trail" target="_blank" rel="noreferrer">Trail Details</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
+                    <article class="recommendation panel" data-id="guy-fleming-trail" data-category="nature" data-lat="32.9200" data-lng="-117.2527">
+                        <span class="recommendation-tag">Nature</span>
+                        <h2>Guy Fleming Trail</h2>
+                        <p>
+                            A short coastal loop with wide-open views and spring wildflowers, ideal when you want a scenic walk without committing to a long hike.
+                        </p>
+                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Guy+Fleming+Trail+La+Jolla" target="_blank" rel="noreferrer">Open Map</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="annies-canyon" data-category="nature" data-lat="33.0060" data-lng="-117.2540">
+                        <span class="recommendation-tag">Nature</span>
+                        <h2>Annie's Canyon Trail</h2>
+                        <p>
+                            A more playful trail choice with narrow sandstone walls and a climb that feels slightly adventurous without requiring a full-day outing.
+                        </p>
+                        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Annie%27s+Canyon+Trail+Solana+Beach" target="_blank" rel="noreferrer">Open Map</a>
+                    </article>
+
+                    <article class="recommendation panel" data-id="san-elijo-lagoon" data-category="nature" data-lat="33.0104" data-lng="-117.2609">
                         <span class="recommendation-tag">Nature</span>
                         <h2>San Elijo Lagoon Ecological Reserve</h2>
                         <p>
@@ -244,14 +249,16 @@
                         <a class="btn" href="https://wildlife.ca.gov/Lands/Places-to-Visit/San-Elijo-Lagoon-ER" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
 
-                    <article class="recommendation panel" data-category="nature">
+                    <article class="recommendation panel" data-id="cabrillo" data-category="nature" data-lat="32.6714" data-lng="-117.2425">
                         <span class="recommendation-tag">Nature</span>
-                        <h2>Joshua Tree National Park</h2>
+                        <h2>Cabrillo National Monument</h2>
                         <p>
-                            The longest outing on this list, but an unforgettable one if you want surreal desert scenery, boulders, and big-sky stargazing.
+                            Worth the drive for panoramic harbor views, tidepools, and a windswept Point Loma perspective that feels distinct from La Jolla.
                         </p>
-                        <a class="btn" href="https://www.nps.gov/jotr/" target="_blank" rel="noreferrer">Visit Website</a>
+                        <a class="btn" href="https://www.nps.gov/cabr/" target="_blank" rel="noreferrer">Visit Website</a>
                     </article>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -261,9 +268,236 @@
         </footer>
     </div>
 
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+    ></script>
     <script>
         const filterButtons = document.querySelectorAll(".filter-button");
         const recommendations = document.querySelectorAll(".recommendation");
+        const mapElement = document.getElementById("things-map");
+        const resetZoomButton = document.getElementById("map-reset-zoom");
+        const markerById = new Map();
+        const defaultMapView = {
+            center: [32.93, -117.18],
+            zoom: 10
+        };
+        const landmarkMarkers = [
+            {
+                title: "Darlington House",
+                category: "wedding",
+                lat: 32.8426,
+                lng: -117.2751
+            },
+            {
+                title: "San Diego Airport",
+                category: "airport",
+                lat: 32.7336,
+                lng: -117.1930
+            }
+        ];
+        const isDesktop = window.matchMedia("(min-width: 901px)");
+        let map;
+        let activeMarkerId = null;
+        let openLabelMarker = null;
+
+        function createMarkerIcon(category) {
+            return L.divIcon({
+                className: "",
+                html: `<span class="map-marker map-marker--${category}"><span class="map-marker__core"></span></span>`,
+                iconSize: [24, 34],
+                iconAnchor: [12, 30],
+                popupAnchor: [0, -24]
+            });
+        }
+
+        function createLandmarkIcon(category) {
+            const symbol = category === "wedding" ? "♥" : "✈";
+
+            return L.divIcon({
+                className: "",
+                html: `
+                    <span class="map-landmark map-landmark--${category}">
+                        <span class="map-landmark__badge" aria-hidden="true">${symbol}</span>
+                    </span>
+                `,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+        }
+
+        function bindClickLabel(marker, title, offset = [0, -18]) {
+            marker.bindTooltip(title, {
+                direction: "top",
+                offset,
+                opacity: 1,
+                permanent: false,
+                sticky: false,
+                interactive: false,
+                className: "map-tooltip"
+            });
+
+            marker.on("click", () => {
+                if (openLabelMarker && openLabelMarker !== marker) {
+                    openLabelMarker.closeTooltip();
+                }
+
+                marker.openTooltip();
+                openLabelMarker = marker;
+            });
+        }
+
+        function initializeMap() {
+            if (!mapElement || typeof L === "undefined" || map) {
+                return;
+            }
+
+            map = L.map(mapElement, {
+                zoomControl: true,
+                scrollWheelZoom: false
+            }).setView(defaultMapView.center, defaultMapView.zoom);
+
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+                subdomains: "abcd",
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            }).addTo(map);
+
+            recommendations.forEach((recommendation) => {
+                const id = recommendation.dataset.id;
+                const category = recommendation.dataset.category;
+                const lat = Number.parseFloat(recommendation.dataset.lat);
+                const lng = Number.parseFloat(recommendation.dataset.lng);
+                const title = recommendation.querySelector("h2")?.textContent?.trim() || "";
+                if (!id || Number.isNaN(lat) || Number.isNaN(lng)) {
+                    return;
+                }
+
+                const marker = L.marker([lat, lng], {
+                    icon: createMarkerIcon(category),
+                    riseOnHover: true,
+                    keyboard: false
+                }).addTo(map);
+
+                bindClickLabel(marker, title);
+                markerById.set(id, marker);
+            });
+
+            landmarkMarkers.forEach((landmark) => {
+                const marker = L.marker([landmark.lat, landmark.lng], {
+                    icon: createLandmarkIcon(landmark.category),
+                    interactive: true,
+                    keyboard: false,
+                    zIndexOffset: 200
+                }).addTo(map);
+
+                bindClickLabel(marker, landmark.title, [0, -14]);
+            });
+
+            map.on("click", () => {
+                if (openLabelMarker) {
+                    openLabelMarker.closeTooltip();
+                    openLabelMarker = null;
+                }
+            });
+
+            map.on("zoomend", syncResetZoomButton);
+            syncResetZoomButton();
+        }
+
+        function syncResetZoomButton() {
+            if (!map || !resetZoomButton) {
+                return;
+            }
+
+            resetZoomButton.hidden = map.getZoom() === defaultMapView.zoom;
+        }
+
+        function clearActiveMarker(markerId) {
+            if (!markerId) {
+                return;
+            }
+
+            const marker = markerById.get(markerId);
+
+            if (!marker) {
+                return;
+            }
+
+            const element = marker.getElement();
+
+            if (element) {
+                element.classList.remove("is-active");
+            }
+
+            marker.setZIndexOffset(0);
+        }
+
+        function activateMarker(markerId) {
+            if (!map || !isDesktop.matches) {
+                return;
+            }
+
+            if (activeMarkerId && activeMarkerId !== markerId) {
+                clearActiveMarker(activeMarkerId);
+            }
+
+            const marker = markerById.get(markerId);
+
+            if (!marker) {
+                return;
+            }
+
+            const element = marker.getElement();
+
+            if (element) {
+                element.classList.add("is-active");
+            }
+
+            marker.setZIndexOffset(1000);
+            map.panTo(marker.getLatLng(), { animate: true });
+            activeMarkerId = markerId;
+        }
+
+        function resetMapCenter() {
+            if (!map || !isDesktop.matches) {
+                return;
+            }
+
+            map.panTo(defaultMapView.center, { animate: true });
+        }
+
+        function applyFilter(filter) {
+            recommendations.forEach((recommendation) => {
+                const matches = filter === "all" || recommendation.dataset.category === filter;
+                const marker = markerById.get(recommendation.dataset.id);
+
+                recommendation.hidden = !matches;
+
+                if (!map || !marker) {
+                    return;
+                }
+
+                if (matches) {
+                    marker.addTo(map);
+                } else {
+                    marker.remove();
+                    if (openLabelMarker === marker) {
+                        marker.closeTooltip();
+                        openLabelMarker = null;
+                    }
+                    if (activeMarkerId === recommendation.dataset.id) {
+                        clearActiveMarker(activeMarkerId);
+                        activeMarkerId = null;
+                        resetMapCenter();
+                    }
+                }
+            });
+        }
+
+        initializeMap();
+        applyFilter("all");
 
         filterButtons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -271,12 +505,64 @@
 
                 filterButtons.forEach((item) => item.classList.remove("is-active"));
                 button.classList.add("is-active");
-
-                recommendations.forEach((recommendation) => {
-                    const matches = filter === "all" || recommendation.dataset.category === filter;
-                    recommendation.hidden = !matches;
-                });
+                applyFilter(filter);
             });
+        });
+
+        if (resetZoomButton) {
+            resetZoomButton.addEventListener("click", () => {
+                if (!map) {
+                    return;
+                }
+
+                map.setZoom(defaultMapView.zoom);
+                syncResetZoomButton();
+            });
+        }
+
+        recommendations.forEach((recommendation) => {
+            const markerId = recommendation.dataset.id;
+
+            recommendation.addEventListener("mouseenter", () => activateMarker(markerId));
+            recommendation.addEventListener("mouseleave", () => {
+                clearActiveMarker(markerId);
+                if (activeMarkerId === markerId) {
+                    activeMarkerId = null;
+                    resetMapCenter();
+                }
+            });
+            recommendation.addEventListener("focusin", () => activateMarker(markerId));
+            recommendation.addEventListener("focusout", (event) => {
+                if (recommendation.contains(event.relatedTarget)) {
+                    return;
+                }
+
+                clearActiveMarker(markerId);
+                if (activeMarkerId === markerId) {
+                    activeMarkerId = null;
+                    resetMapCenter();
+                }
+            });
+        });
+
+        isDesktop.addEventListener("change", (event) => {
+            if (!event.matches) {
+                if (activeMarkerId) {
+                    clearActiveMarker(activeMarkerId);
+                    activeMarkerId = null;
+                }
+                return;
+            }
+
+            if (map) {
+                window.setTimeout(() => map.invalidateSize(), 0);
+            }
+        });
+
+        window.addEventListener("load", () => {
+            if (map) {
+                map.invalidateSize();
+            }
         });
     </script>
 </body>

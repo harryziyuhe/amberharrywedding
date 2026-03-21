@@ -42,36 +42,40 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Things to Do page:
   - Use `Temecula.png` near the top of the page above the category filters
   - Organize entries into `Eat & Drink`, `Fun`, `Nature`
-  - Keep the centered filter control row at the top of the list
+  - Keep the centered filter control row at the top of the page content
+  - Below the top image and filters, switch to a page-specific wider desktop layout with a fixed or sticky map on the left and the scrollable recommendation list on the right
+  - Use free mapping tools only: `Leaflet` with `CARTO Light` tiles
+  - Show color-coded pins for each category on the map
+  - Hovering a recommendation card should pan toward the matching location without changing zoom and enlarge the existing map pin for the full hover or focus duration without replacing it with a label or tooltip
+  - Add a reset-zoom control that appears only when the guest manually changes zoom and returns the map to its default zoom
+  - Hide the map on mobile and preserve a clean card-based browsing experience
   - San Diego suggestions
     + Eat & Drink
       * Solunto Restaurant & Bakery
+      * Sushi Ota
       * La Palapa Authentic Mexican Food
+      * Wayfarer
+      * Raised by Wolves
+      * Viet Nom
+      * Poki One N Half
       * Taste of Hunan
       * Meet Fresh
-      * Sushi Ota
-      * Viet Nom
-      * Wayfarer
-      * Poki One N Half
-      * Raised by Wolves
     + Fun
       * USS Midway
-      * Picnic at Calumet Park
-      * Balboa Park
-      * San Diego Botanic Garden
-      * Hotel del Coronado
       * Old Town San Diego
-      * Temecula Wine Country
+      * Balboa Park
+      * Hotel del Coronado
+      * Picnic at Calumet Park
+      * San Diego Botanic Garden
     + Nature
+      * La Jolla Cove
+      * Scripps Coastal Meander Trail
       * Guy Fleming Trail
       * Annie's Canyon Trail
-      * Scripps Coastal Meander Trail
-      * La Jolla Cove
-      * Cabrillo National Monument
       * San Elijo Lagoon and Ecological Reserve
-      * Joshua Tree National Park
+      * Cabrillo National Monument
 
-  - Each recommendation remains centered and includes a title, brief description, and optional action link
+  - Each recommendation remains centered and includes a title, brief description, and action link
 
 - FAQ page:
   - Use `Balboa Park.png` above the disclosure list to soften the page before the text-heavy section
@@ -87,7 +91,10 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 ## Public Interfaces and Behavior
 
-- The only client-side interaction is the category filter on `Things to Do`
+- `Things to Do` is the only page with a widened two-column content region below the top image
+- `Things to Do` uses `Leaflet` with `CARTO Light` for a free embedded map
+- The `Things to Do` page keeps the category filter, updates both cards and pins by category, pans toward the hovered place on desktop without changing zoom, enlarges the corresponding pin without showing a label or tooltip, and exposes a reset-zoom control when the guest manually changes zoom
+- The `Things to Do` map is hidden on mobile and the cards remain the primary interface there
 - FAQ items use semantic foldable disclosure behavior with native HTML rather than JavaScript
 - Filter buttons show all items by default and allow guests to switch between `Eat & Drink`, `Fun`, and `Nature`
 - The homepage includes a standalone lead video section above the hero using native HTML video attributes only
@@ -106,9 +113,9 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
-- Confirm the Things to Do requirements explicitly mention `Eat & Drink`, `Fun`, and `Nature` and include the full updated San Diego destination list under each category
+- Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, `Leaflet` with `CARTO Light`, category-colored pins, hover-driven enlarged-pin behavior without labels, pan-without-zoom hover behavior, the conditional reset-zoom control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
-- Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS only for filtering
+- Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS for filtering and page-specific map behavior
 
 ## Assumptions
 
@@ -120,4 +127,8 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - The homepage alone should override the normal reserved top padding so the video can start at the top edge while the nav floats above it
 - The registry page remains image-free because no image was assigned to it
 - The preferred image solution is one shared compact but aggressive gradient-based transition behind images rather than padding, per-page tuning, or CSS masking
+- The `Things to Do` page is the only page that should widen beyond the shared editorial column for a desktop map/list experience
+- The map should use free tools only, with `Leaflet` and `CARTO Light` instead of Google Maps or any paid API
+- Mobile should hide the `Things to Do` map rather than trying to preserve the desktop split layout
+- `Temecula.png` remains the editorial image on the page even though Temecula is no longer part of the recommendations
 - Existing editorial design assumptions remain in place unless superseded by the FAQ and enhanced venue-detail requirements

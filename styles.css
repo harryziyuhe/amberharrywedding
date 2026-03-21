@@ -540,6 +540,241 @@ p {
     display: none;
 }
 
+.things-shell {
+    width: min(100%, 1340px);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.things-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+}
+
+.things-map-column {
+    position: sticky;
+    top: 112px;
+}
+
+.things-map-frame {
+    position: relative;
+    padding: 14px;
+}
+
+.things-map {
+    width: 100%;
+    height: min(68vh, 720px);
+    min-height: 520px;
+    border-radius: calc(var(--radius) - 8px);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.things-map .leaflet-control-attribution {
+    font-size: 0.7rem;
+}
+
+.map-reset-zoom {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 500;
+    min-height: 38px;
+    padding: 0 14px;
+    border: 1px solid rgba(79, 110, 112, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 252, 247, 0.96);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 14px 24px rgba(30, 39, 44, 0.12);
+}
+
+.map-reset-zoom:hover {
+    border-color: rgba(79, 110, 112, 0.3);
+    background: rgba(255, 255, 255, 0.99);
+}
+
+.things-map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    justify-content: center;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot--eat-drink {
+    background: #b96f57;
+}
+
+.legend-dot--fun {
+    background: #4e7a82;
+}
+
+.legend-dot--nature {
+    background: #7c8a52;
+}
+
+.things-list {
+    min-width: 0;
+    max-height: calc(100vh - 132px);
+    overflow-y: auto;
+    padding-right: 8px;
+    overscroll-behavior: contain;
+}
+
+.things-list .recommendation-list {
+    gap: 20px;
+}
+
+.things-list .recommendation {
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.things-list .recommendation:hover,
+.things-list .recommendation:focus-within {
+    transform: translateY(-2px);
+    border-color: rgba(79, 110, 112, 0.22);
+    box-shadow: 0 20px 36px rgba(40, 44, 55, 0.08);
+}
+
+.map-marker {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 24px;
+    transition: transform 180ms ease;
+}
+
+.map-marker::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: currentColor;
+    box-shadow: 0 12px 24px rgba(30, 39, 44, 0.16);
+    transition: box-shadow 180ms ease;
+}
+
+.map-marker::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 12px;
+    height: 4px;
+    margin-left: -6px;
+    border-radius: 999px;
+    background: rgba(42, 52, 58, 0.12);
+    filter: blur(1px);
+    transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.map-marker__core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    transform: translate(-50%, -50%);
+}
+
+.map-marker--eat-drink {
+    color: #b96f57;
+}
+
+.map-marker--fun {
+    color: #4e7a82;
+}
+
+.map-marker--nature {
+    color: #7c8a52;
+}
+
+.map-landmark {
+    display: inline-flex;
+}
+
+.map-landmark__badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #f8f4ec;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 12px 24px rgba(30, 39, 44, 0.18);
+}
+
+.map-landmark--wedding .map-landmark__badge {
+    background: #9f6c73;
+}
+
+.map-landmark--airport .map-landmark__badge {
+    background: #4e7a82;
+}
+
+.leaflet-marker-icon.is-active .map-marker {
+    transform: scale(1.35);
+}
+
+.leaflet-marker-icon.is-active .map-marker::before {
+    box-shadow: 0 16px 28px rgba(30, 39, 44, 0.22), 0 0 0 6px rgba(255, 255, 255, 0.54);
+}
+
+.leaflet-marker-icon.is-active .map-marker::after {
+    transform: scale(1.2);
+    opacity: 0.92;
+}
+
+.map-tooltip {
+    background: rgba(255, 252, 247, 0.98);
+    border: 1px solid rgba(79, 110, 112, 0.14);
+    border-radius: 999px;
+    box-shadow: 0 14px 24px rgba(30, 39, 44, 0.12);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 7px 12px;
+    text-transform: uppercase;
+}
+
+.map-tooltip::before {
+    display: none;
+}
+
 .registry {
     min-height: calc(100vh - 240px);
     display: grid;
@@ -647,6 +882,25 @@ footer p {
 
     .brand-link {
         font-size: 1.3rem;
+    }
+
+    .things-shell {
+        width: min(100%, var(--container));
+        padding: 0;
+    }
+
+    .things-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .things-map-column {
+        display: none;
+    }
+
+    .things-list {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
     }
 }
 
