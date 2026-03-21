@@ -2,7 +2,7 @@
 
 ## Summary
 
-This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, page-specific photography, and an asset-light artistic direction using CSS atmosphere, inline SVG icons, and curated images. The FAQ page now uses foldable disclosure rows so guests can open only the details they need, and page photography is presented with a compact but aggressive gradient-based transition treatment so the images' built-in white fade dissolves into the warmer page background without reading as a border or washing out nearby text.
+This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, page-specific photography, and an asset-light artistic direction using CSS atmosphere, inline SVG icons, curated images, and a homepage lead video. The FAQ page now uses foldable disclosure rows so guests can open only the details they need, and page photography is presented with a compact but aggressive gradient-based transition treatment so the images' built-in white fade dissolves into the warmer page background without reading as a border or washing out nearby text. The homepage video is the only full-bleed element, spans the full viewport width, and begins at the top edge of the page while the navigation floats above it.
 
 ## Key Changes
 
@@ -15,6 +15,11 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Ignore `images/Torrey Pines_V.png`
 
 - Homepage:
+  - Begin the homepage with a dedicated top video section using `assets/Sunset.m4v`
+  - Video should autoplay on load, remain muted, play inline, and loop continuously
+  - The video should be full-bleed and span the full width of the screen
+  - Only the video escapes the centered page shell; the hero and all other homepage content remain constrained
+  - On the homepage, the video begins at the very top of the page and the navigation floats over the page in its elevated position
   - Keep the landing page intentionally minimal
   - Use a coastal wash and layered gradients to create an artistic hero around the assigned `Torrey Pines.png` image
   - Present names, date, and location with a strong editorial hierarchy
@@ -36,9 +41,36 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 - Things to Do page:
   - Use `Temecula.png` near the top of the page above the category filters
-  - Organize entries into `Food`, `Experiences`, and `Hikes`
+  - Organize entries into `Eat & Drink`, `Fun`, `Nature`
   - Keep the centered filter control row at the top of the list
-  - `Experiences` should explicitly include La Jolla activity suggestions such as `La Jolla Cove`, `Birch Aquarium`, and `Torrey Pines Golf Course`
+  - San Diego suggestions
+    + Eat & Drink
+      * Solunto Restaurant & Bakery
+      * La Palapa Authentic Mexican Food
+      * Taste of Hunan
+      * Meet Fresh
+      * Sushi Ota
+      * Viet Nom
+      * Wayfarer
+      * Poki One N Half
+      * Raised by Wolves
+    + Fun
+      * USS Midway
+      * Picnic at Calumet Park
+      * Balboa Park
+      * San Diego Botanic Garden
+      * Hotel del Coronado
+      * Old Town San Diego
+      * Temecula Wine Country
+    + Nature
+      * Guy Fleming Trail
+      * Annie's Canyon Trail
+      * Scripps Coastal Meander Trail
+      * La Jolla Cove
+      * Cabrillo National Monument
+      * San Elijo Lagoon and Ecological Reserve
+      * Joshua Tree National Park
+
   - Each recommendation remains centered and includes a title, brief description, and optional action link
 
 - FAQ page:
@@ -57,7 +89,10 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 - The only client-side interaction is the category filter on `Things to Do`
 - FAQ items use semantic foldable disclosure behavior with native HTML rather than JavaScript
-- Filter buttons show all items by default and allow guests to switch between `Food`, `Experiences`, and `Hikes`
+- Filter buttons show all items by default and allow guests to switch between `Eat & Drink`, `Fun`, and `Nature`
+- The homepage includes a standalone lead video section above the hero using native HTML video attributes only
+- The homepage lead video is the only full-width media element; the rest of the site remains in the centered editorial layout
+- The homepage uses a page-specific nav offset treatment so the nav floats over the top video without changing nav behavior on the other pages
 - Schedule venue blocks include external Google Maps links beneath the location name and address
 - Assigned page images are rendered with static HTML image markup and shared CSS only, using one compact but high-contrast gradient-based transition treatment across all image-bearing pages
 - All other site behavior remains static HTML and CSS with no framework, backend, or routing changes
@@ -65,10 +100,13 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 ## Test Plan
 
 - Confirm `PLAN.md` mentions all current pages, including `FAQ`, and matches the live nav structure
+- Confirm `PLAN.md` documents the homepage video section using `assets/Sunset.m4v` with autoplay, muted, loop, and inline playback
+- Confirm `PLAN.md` states that the homepage video is full-width and that the hero remains centered below it
+- Confirm `PLAN.md` states that the homepage nav/video overlap behavior is homepage-only
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
-- Confirm the Things to Do requirements explicitly mention the three filter categories and the `Torrey Pines Golf Course` entry under `Experiences`
+- Confirm the Things to Do requirements explicitly mention `Eat & Drink`, `Fun`, and `Nature` and include the full updated San Diego destination list under each category
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
 - Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS only for filtering
 
@@ -77,6 +115,9 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - FAQ disclosure behavior should be implemented with semantic HTML and CSS rather than custom JavaScript
 - `PLAN.md` should describe the implemented state of the site rather than future optional ideas
 - The site now uses the provided local landscape images in `images/` plus Google Fonts and external destination links
+- The homepage video should use native HTML video attributes instead of JavaScript playback control
+- Only the homepage video should break out of the centered shell
+- The homepage alone should override the normal reserved top padding so the video can start at the top edge while the nav floats above it
 - The registry page remains image-free because no image was assigned to it
 - The preferred image solution is one shared compact but aggressive gradient-based transition behind images rather than padding, per-page tuning, or CSS masking
 - Existing editorial design assumptions remain in place unless superseded by the FAQ and enhanced venue-detail requirements

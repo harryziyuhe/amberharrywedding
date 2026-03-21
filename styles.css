@@ -36,6 +36,10 @@ body {
     padding: 104px 24px 48px;
 }
 
+body.homepage {
+    padding-top: 0;
+}
+
 body::before,
 body::after {
     content: "";
@@ -180,6 +184,21 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+}
+
+.lead-video {
+    overflow: hidden;
+    margin-bottom: 30px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-radius: 0;
+}
+
+.lead-video video {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .hero {
