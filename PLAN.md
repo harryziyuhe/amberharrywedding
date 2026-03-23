@@ -43,11 +43,13 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Use `Temecula.png` near the top of the page above the category filters
   - Organize entries into `Eat & Drink`, `Fun`, `Nature`
   - Keep the centered filter control row at the top of the page content
-  - Below the top image and filters, switch to a page-specific wider desktop layout with a fixed or sticky map on the left and the scrollable recommendation list on the right
+  - Below the top image and filters, use a page-specific wider desktop layout with a sticky map on the left and a normal-flow recommendation list on the right
   - Use free mapping tools only: `Leaflet` with `CARTO Light` tiles
   - Show color-coded pins for each category on the map
-  - Hovering a recommendation card should pan toward the matching location without changing zoom and enlarge the existing map pin for the full hover or focus duration without replacing it with a label or tooltip
-  - Add a reset-zoom control that appears only when the guest manually changes zoom and returns the map to its default zoom
+  - Hovering a recommendation card should animate the existing map pin with a slower hop for the full hover or focus duration, slightly lighten its color, and avoid moving the map or replacing the pin with a label or tooltip
+  - Add a reset-view control that appears only when the guest manually changes the map view and returns both the map center and zoom to their defaults
+  - Use a single page-level scroll rather than a nested scroll inside the recommendation list
+  - Reserve a dedicated photo slot on each recommendation card using a styled placeholder treatment for now rather than real destination images
   - Hide the map on mobile and preserve a clean card-based browsing experience
   - San Diego suggestions
     + Eat & Drink
@@ -93,7 +95,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 - `Things to Do` is the only page with a widened two-column content region below the top image
 - `Things to Do` uses `Leaflet` with `CARTO Light` for a free embedded map
-- The `Things to Do` page keeps the category filter, updates both cards and pins by category, pans toward the hovered place on desktop without changing zoom, enlarges the corresponding pin without showing a label or tooltip, and exposes a reset-zoom control when the guest manually changes zoom
+- The `Things to Do` page uses one page-level scroll, keeps the map sticky on desktop while the section is in view, reserves a placeholder photo slot on every card, updates both cards and pins by category, animates the hovered pin with a slower lighter hop without showing a label or tooltip, never moves the map automatically, and exposes a reset-view control when the guest manually changes center or zoom
 - The `Things to Do` map is hidden on mobile and the cards remain the primary interface there
 - FAQ items use semantic foldable disclosure behavior with native HTML rather than JavaScript
 - Filter buttons show all items by default and allow guests to switch between `Eat & Drink`, `Fun`, and `Nature`
@@ -113,7 +115,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
-- Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, `Leaflet` with `CARTO Light`, category-colored pins, hover-driven enlarged-pin behavior without labels, pan-without-zoom hover behavior, the conditional reset-zoom control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
+- Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, a single page-level scroll, a sticky map on desktop, placeholder photo slots on every card, `Leaflet` with `CARTO Light`, category-colored pins, slower hover hopping with slightly lighter active color, no automatic map motion, the conditional reset-view control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
 - Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS for filtering and page-specific map behavior
 
