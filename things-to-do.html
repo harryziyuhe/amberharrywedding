@@ -6,7 +6,7 @@
     <title>Things to Do - Amber & Harry Wedding</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Quintessential:wght@400&family=Clicker+Script:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Quintessential:wght@400&family=Monsieur+La+Doulaise:wght@400&display=swap" rel="stylesheet">
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -20,6 +20,18 @@
         <nav class="navbar" aria-label="Primary">
             <a class="brand-link" href="index.html">Amber &amp; Harry</a>
             <div class="nav-right">
+                <a href="schedule.html">Schedule</a>
+                <a href="travel.html">Travel</a>
+                <a class="active" href="things-to-do.html">Things to Do</a>
+                <a href="faq.html">FAQ</a>
+                <a href="registry.html">Registry</a>
+            </div>
+            <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-menu-things">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-menu" id="primary-menu-things">
                 <a href="schedule.html">Schedule</a>
                 <a href="travel.html">Travel</a>
                 <a class="active" href="things-to-do.html">Things to Do</a>
@@ -337,6 +349,7 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""
     ></script>
+    <script src="nav.js"></script>
     <script>
         const filterButtons = document.querySelectorAll(".filter-button");
         const recommendations = document.querySelectorAll(".recommendation");

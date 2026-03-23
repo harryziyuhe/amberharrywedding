@@ -10,6 +10,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Use `Playfair Display` for headings and `Inter` for supporting text
   - Maintain a centered column layout with restrained spacing, warm neutrals, muted coastal accents, and a lighter editorial fixed nav
   - Keep `FAQ` in the main navigation alongside `Schedule`, `Travel`, `Things to Do`, and `Registry`
+  - Standardize navbar typography site-wide with the decorative/script-style brand treatment preserved and all navigation links set in one supporting font
   - Mix CSS gradients, soft decorative shapes, glassy surfaces, inline SVG icons, and curated page photography
   - Use a shared editorial image treatment with natural image height and a compact but more aggressive white-to-transparent surround that softens the image boundary without spreading too far into nearby content
   - Ignore `images/Torrey Pines_V.png`
@@ -93,9 +94,12 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 
 ## Public Interfaces and Behavior
 
+- The site uses one shared responsive navbar across all pages
+- On desktop, the full inline nav remains visible
+- On narrow viewports, the navbar collapses to the brand and a hamburger toggle; clicking the toggle reveals a dropdown list of the existing navigation links and changes the icon to an `X`
 - `Things to Do` is the only page with a widened two-column content region below the top image
 - `Things to Do` uses `Leaflet` with `CARTO Light` for a free embedded map
-- The `Things to Do` page uses one page-level scroll, keeps the map sticky on desktop while the section is in view, reserves a placeholder photo slot on every card, updates both cards and pins by category, animates the hovered pin with a slower lighter hop without showing a label or tooltip, never moves the map automatically, and exposes a reset-view control when the guest manually changes center or zoom
+- The `Things to Do` page uses one page-level scroll, keeps the map sticky on desktop while the section is in view, reserves a placeholder photo slot on every card, updates both the card list and pins by category, animates the hovered pin with a slower lighter hop without showing a label or tooltip, never moves the map automatically, and exposes a reset-view control when the guest manually changes center or zoom
 - The `Things to Do` map is hidden on mobile and the cards remain the primary interface there
 - FAQ items use semantic foldable disclosure behavior with native HTML rather than JavaScript
 - Filter buttons show all items by default and allow guests to switch between `Eat & Drink`, `Fun`, and `Nature`
@@ -112,6 +116,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the homepage video section using `assets/Sunset.m4v` with autoplay, muted, loop, and inline playback
 - Confirm `PLAN.md` states that the homepage video is full-width and that the hero remains centered below it
 - Confirm `PLAN.md` states that the homepage nav/video overlap behavior is homepage-only
+- Confirm `PLAN.md` documents the standardized navbar typography and the narrow-screen hamburger/dropdown behavior
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
