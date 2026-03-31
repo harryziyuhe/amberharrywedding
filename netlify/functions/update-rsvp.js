@@ -20,6 +20,7 @@ exports.handler = async (event) => {
 
     const token = body.token;
     const members = Array.isArray(body.members) ? body.members : null;
+    const plusOne = body.plusOne || null;
 
     if (!token || !members || members.length === 0) {
         return badRequest("Please provide a valid RSVP payload.");
@@ -33,6 +34,17 @@ exports.handler = async (event) => {
     }
 
     try {
+        const partyRows = await supabaseRequest(
+            `parties?select=id,plus_one_allowed&id=eq.${tokenPayload.partyId}&limit=1`
+        );
+
+        if (!partyRows || partyRows.length === 0) {
+            return json(404, {
+                error: "We could not find that party."
+            });
+        }
+
+        const party = partyRows[0];
         const invitedMembers = await supabaseRequest(
             `party_members?select=id,party_id,invited&party_id=eq.${tokenPayload.partyId}&invited=is.true`
         );
@@ -76,10 +88,27 @@ exports.handler = async (event) => {
             });
         }
 
+        if (party.plus_one_allowed === true) {
+            if (!plusOne || typeof plusOne.attending !== "boolean") {
+                return badRequest("Please choose attending or not attending for your plus one.");
+            }
+
+            if (plusOne.attending && !String(plusOne.entreeChoice || "").trim()) {
+                return badRequest("Please choose an entree for your attending plus one.");
+            }
+        } else if (plusOne) {
+            return json(403, {
+                error: "That RSVP update does not include an allowed plus one."
+            });
+        }
+
         await supabaseRequest(`parties?id=eq.${tokenPayload.partyId}`, {
             method: "PATCH",
             prefer: "return=minimal",
             body: {
+                plus_one_attending: party.plus_one_allowed === true ? plusOne.attending : null,
+                plus_one_name: party.plus_one_allowed === true && plusOne.attending ? String(plusOne.name || "").trim() || null : null,
+                plus_one_entree_choice: party.plus_one_allowed === true && plusOne.attending ? String(plusOne.entreeChoice).trim() : null,
                 updated_at: new Date().toISOString()
             }
         });
