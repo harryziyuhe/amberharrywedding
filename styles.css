@@ -76,12 +76,18 @@ svg {
 }
 
 h1,
-h2,
-h3,
-h4 {
-    font-family: "Quintessential", serif;
+h2 {
+    font-family: "Carattere", serif;
     font-weight: 400;
     letter-spacing: 0.02em;
+    line-height: 1.12;
+}
+
+h3,
+h4 {
+    font-family: "Playfair", serif;
+    font-weight: 400;
+    letter-spacing: 0;
     line-height: 1.12;
 }
 
@@ -775,6 +781,239 @@ p {
     text-transform: uppercase;
 }
 
+.rsvp-shell {
+    display: grid;
+    gap: 24px;
+}
+
+.rsvp-panel {
+    padding: clamp(28px, 5vw, 42px);
+}
+
+.rsvp-panel button:disabled {
+    opacity: 0.72;
+    cursor: wait;
+}
+
+.rsvp-kicker {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: var(--accent-deep);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.rsvp-intro {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.rsvp-intro h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 12px;
+}
+
+.rsvp-intro p {
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.rsvp-intro--compact {
+    margin-bottom: 12px;
+}
+
+.rsvp-step[hidden] {
+    display: none;
+}
+
+.rsvp-lookup-form {
+    display: grid;
+    gap: 18px;
+}
+
+.rsvp-lookup-grid,
+.rsvp-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.rsvp-field {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+    border: 0;
+    padding: 0;
+}
+
+.rsvp-field span,
+.rsvp-field legend,
+.rsvp-member-note,
+.rsvp-supporting {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.rsvp-field legend {
+    margin-bottom: 10px;
+}
+
+.rsvp-field input,
+.rsvp-field select {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    border: 1px solid rgba(79, 110, 112, 0.18);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.78);
+    color: var(--text);
+    font: inherit;
+}
+
+.rsvp-field input:focus,
+.rsvp-field select:focus {
+    outline: 2px solid rgba(79, 110, 112, 0.22);
+    outline-offset: 2px;
+}
+
+.rsvp-actions,
+.rsvp-confirm-actions,
+.rsvp-success-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.rsvp-message {
+    min-height: 24px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.rsvp-message.is-error {
+    color: #8b5247;
+}
+
+.rsvp-message.is-success {
+    color: var(--accent-deep);
+}
+
+.rsvp-supporting {
+    display: inline-block;
+}
+
+.rsvp-confirm {
+    text-align: center;
+    display: grid;
+    gap: 14px;
+}
+
+.rsvp-confirm h2,
+.rsvp-success h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.rsvp-party-name {
+    color: var(--text);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1.15;
+}
+
+.rsvp-form {
+    display: grid;
+    gap: 22px;
+}
+
+.rsvp-members {
+    display: grid;
+}
+
+.rsvp-member {
+    padding: 24px 0;
+    border-top: 1px solid rgba(79, 110, 112, 0.12);
+}
+
+.rsvp-member:first-child {
+    padding-top: 0;
+    border-top: 0;
+}
+
+.rsvp-member:last-child {
+    padding-bottom: 0;
+}
+
+.rsvp-member-header {
+    margin-bottom: 18px;
+}
+
+.rsvp-member-header h3 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 8px;
+}
+
+.rsvp-choice-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.rsvp-choice {
+    position: relative;
+}
+
+.rsvp-choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.rsvp-choice span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 16px;
+    border: 1px solid rgba(79, 110, 112, 0.16);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.62);
+    color: var(--text);
+    font-family: "EB Garamond", serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.rsvp-choice input:checked + span {
+    border-color: var(--accent-deep);
+    background: rgba(110, 139, 138, 0.12);
+    color: var(--text);
+}
+
+.rsvp-choice input:focus-visible + span {
+    outline: 2px solid rgba(79, 110, 112, 0.28);
+    outline-offset: 2px;
+}
+
+.rsvp-entree[hidden] {
+    display: none;
+}
+
+.rsvp-entree select {
+    font-family: "Inter", sans-serif;
+}
+
+.rsvp-success {
+    text-align: center;
+    display: grid;
+    gap: 14px;
+}
+
 .map-marker {
     position: relative;
     display: block;
@@ -965,7 +1204,7 @@ p {
 }
 
 .faq-question {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
 }
 
 .faq-toggle {
@@ -1134,5 +1373,18 @@ footer p {
     .recommendation,
     .registry-card {
         padding: 24px 22px;
+    }
+
+    .rsvp-panel {
+        padding: 24px 22px;
+    }
+
+    .rsvp-lookup-grid,
+    .rsvp-choice-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .rsvp-choice-set {
+        gap: 10px;
     }
 }
