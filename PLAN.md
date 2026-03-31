@@ -2,14 +2,14 @@
 
 ## Summary
 
-This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, page-specific photography, and an asset-light artistic direction using CSS atmosphere, inline SVG icons, curated images, and a homepage lead video. The FAQ page now uses foldable disclosure rows so guests can open only the details they need, and page photography is presented with a compact but aggressive gradient-based transition treatment so the images' built-in white fade dissolves into the warmer page background without reading as a border or washing out nearby text. The homepage video is the only full-bleed element, spans the full viewport width, and begins at the top edge of the page while the navigation floats above it.
+This site is a multi-page editorial wedding website built as static HTML and CSS with minimal vanilla JavaScript. The current scope includes `Schedule`, `Travel`, `Things to Do`, `RSVP`, `FAQ`, and `Registry` pages, all tied together by a shared visual system, primary navigation, refined typography, page-specific photography, and an asset-light artistic direction using CSS atmosphere, inline SVG icons, curated images, a homepage lead video, and a thin dynamic RSVP layer powered by Netlify Functions. The FAQ page now uses foldable disclosure rows so guests can open only the details they need, page photography is presented with a compact but aggressive gradient-based transition treatment so the images' built-in white fade dissolves into the warmer page background without reading as a border or washing out nearby text, and the RSVP experience keeps the site mostly static by confining all dynamic guest interaction to a single page backed by a lightweight hosted database.
 
 ## Key Changes
 
 - Global design system:
   - Use `Playfair Display` for headings and `Inter` for supporting text
   - Maintain a centered column layout with restrained spacing, warm neutrals, muted coastal accents, and a lighter editorial fixed nav
-  - Keep `FAQ` in the main navigation alongside `Schedule`, `Travel`, `Things to Do`, and `Registry`
+  - Keep `RSVP` and `FAQ` in the main navigation alongside `Schedule`, `Travel`, `Things to Do`, and `Registry`
   - Standardize navbar typography site-wide with the decorative/script-style brand treatment preserved and all navigation links set in one supporting font
   - Mix CSS gradients, soft decorative shapes, glassy surfaces, inline SVG icons, and curated page photography
   - Use a shared editorial image treatment with natural image height and a compact but more aggressive white-to-transparent surround that softens the image boundary without spreading too far into nearby content
@@ -92,11 +92,27 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Keep the registry page minimal and centered
   - Preserve the refined button and spacing treatment so it matches the rest of the site
 
+- RSVP page:
+  - Add a dedicated `rsvp.html` page in the same editorial style as the rest of the site
+  - Use a single-page guest flow:
+    * lookup by first name and last initial
+    * confirmation state showing the matched party name
+    * party-based RSVP form on the same page
+    * clear success state after save
+  - Prefill existing RSVP values when a party is loaded so guests can update later using the same lookup
+  - For each invited party member, allow attending yes/no and show entree choices only when attending is yes
+  - Keep the page centered, refined, and minimal rather than app-like or administrative
+  - Back the page with two Netlify Functions and a lightweight hosted data layer using Supabase
+  - Preserve privacy by exposing only the matched party after exact lookup and never exposing the full guest list or contact data
+
 ## Public Interfaces and Behavior
 
 - The site uses one shared responsive navbar across all pages
 - On desktop, the full inline nav remains visible
 - On narrow viewports, the navbar collapses to the brand and a hamburger toggle; clicking the toggle reveals a dropdown list of the existing navigation links and changes the icon to an `X`
+- The site includes a single `RSVP` page backed by Netlify Functions rather than per-guest pages or client-side database access
+- RSVP lookup requires `firstName` and `lastInitial`, is case-insensitive, and reveals only the matched party after a successful lookup
+- RSVP updates are party-based, support later edits, and keep entree choices conditional on attendance
 - `Things to Do` is the only page with a widened two-column content region below the top image
 - `Things to Do` uses `Leaflet` with `CARTO Light` for a free embedded map
 - The `Things to Do` page uses one page-level scroll, keeps the map sticky on desktop while the section is in view, reserves a placeholder photo slot on every card, updates both the card list and pins by category, animates the hovered pin with a slower lighter hop without showing a label or tooltip, never moves the map automatically, and exposes a reset-view control when the guest manually changes center or zoom
@@ -113,6 +129,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 ## Test Plan
 
 - Confirm `PLAN.md` mentions all current pages, including `FAQ`, and matches the live nav structure
+- Confirm `PLAN.md` mentions the `RSVP` page and the Netlify Functions + Supabase RSVP layer
 - Confirm `PLAN.md` documents the homepage video section using `assets/Sunset.m4v` with autoplay, muted, loop, and inline playback
 - Confirm `PLAN.md` states that the homepage video is full-width and that the hero remains centered below it
 - Confirm `PLAN.md` states that the homepage nav/video overlap behavior is homepage-only
@@ -120,6 +137,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
+- Confirm the RSVP requirements explicitly mention single-page lookup by first name and last initial, confirmation before form reveal, party-based updates, conditional entree fields, later edits, Netlify Functions, Supabase, and lightweight privacy constraints
 - Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, a single page-level scroll, a sticky map on desktop, placeholder photo slots on every card, `Leaflet` with `CARTO Light`, category-colored pins, slower hover hopping with slightly lighter active color, no automatic map motion, the conditional reset-view control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
 - Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS for filtering and page-specific map behavior
@@ -136,6 +154,8 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - The preferred image solution is one shared compact but aggressive gradient-based transition behind images rather than padding, per-page tuning, or CSS masking
 - The `Things to Do` page is the only page that should widen beyond the shared editorial column for a desktop map/list experience
 - The map should use free tools only, with `Leaflet` and `CARTO Light` instead of Google Maps or any paid API
+- The RSVP feature should preserve the static site architecture by using a single dynamic page backed by Netlify Functions and Supabase rather than a framework or per-guest routing
+- Secrets must live only in Netlify environment variables and the browser should never receive database service credentials
 - Mobile should hide the `Things to Do` map rather than trying to preserve the desktop split layout
 - `Temecula.png` remains the editorial image on the page even though Temecula is no longer part of the recommendations
 - Existing editorial design assumptions remain in place unless superseded by the FAQ and enhanced venue-detail requirements
