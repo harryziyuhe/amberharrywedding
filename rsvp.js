@@ -66,7 +66,12 @@ function resetExperience() {
 }
 
 function describeParty(party) {
-    return party.members.length === 1 ? "1 invited guest" : `${party.members.length} invited guests`;
+    const invitedCount = party.members.length;
+    const baseLabel = invitedCount === 1 ? "1 invited guest" : `${invitedCount} invited guests`;
+    if (party.plusOneAllowed) {
+        return `${baseLabel} with one optional guest`;
+    }
+    return baseLabel;
 }
 
 function createOption(value, label, selectedValue) {
@@ -163,11 +168,116 @@ function buildMember(member) {
     return article;
 }
 
+function buildPlusOne(plusOneState) {
+    const article = document.createElement("article");
+    article.className = "rsvp-member rsvp-member--plus-one";
+
+    const header = document.createElement("div");
+    header.className = "rsvp-member-header";
+
+    const title = document.createElement("h3");
+    title.textContent = "Guest";
+
+    const note = document.createElement("p");
+    note.className = "rsvp-member-note";
+    note.textContent = "You may bring one guest if you would like. Their name is optional.";
+
+    header.append(title, note);
+
+    const grid = document.createElement("div");
+    grid.className = "rsvp-choice-grid";
+
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "rsvp-field";
+
+    const legend = document.createElement("legend");
+    legend.textContent = "Attending";
+
+    const choiceSet = document.createElement("div");
+    choiceSet.className = "rsvp-choice-set";
+    const radioName = "plus-one-attending";
+
+    [
+        { value: "yes", label: "Will Attend" },
+        { value: "no", label: "Will Not Attend" }
+    ].forEach((choice) => {
+        const label = document.createElement("label");
+        label.className = "rsvp-choice";
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = radioName;
+        input.value = choice.value;
+        input.checked =
+            (choice.value === "yes" && plusOneState.attending === true) ||
+            (choice.value === "no" && plusOneState.attending === false);
+
+        const pill = document.createElement("span");
+        pill.textContent = choice.label;
+
+        label.append(input, pill);
+        choiceSet.append(label);
+    });
+
+    fieldset.append(legend, choiceSet);
+
+    const entreeField = document.createElement("label");
+    entreeField.className = "rsvp-field rsvp-entree";
+    entreeField.hidden = plusOneState.attending !== true;
+
+    const entreeLabel = document.createElement("span");
+    entreeLabel.textContent = "Entree";
+
+    const entreeSelect = document.createElement("select");
+    entreeSelect.name = "plus-one-entree";
+    entreeSelect.append(createOption("", "Select an entree", ""));
+    RSVP_ENTREE_OPTIONS.forEach((choice) => {
+        entreeSelect.append(createOption(choice.value, choice.label, plusOneState.entreeChoice || ""));
+    });
+    entreeField.append(entreeLabel, entreeSelect);
+
+    const nameField = document.createElement("label");
+    nameField.className = "rsvp-field rsvp-plus-one-name";
+    nameField.hidden = plusOneState.attending !== true;
+
+    const nameLabel = document.createElement("span");
+    nameLabel.textContent = "Guest Name (Optional)";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.name = "plus-one-name";
+    nameInput.autocomplete = "name";
+    nameInput.value = plusOneState.name || "";
+
+    nameField.append(nameLabel, nameInput);
+
+    article.querySelectorAll(`input[name="${radioName}"]`);
+    grid.append(fieldset, entreeField);
+    article.append(header, grid, nameField);
+
+    article.querySelectorAll(`input[name="${radioName}"]`).forEach((input) => {
+        input.addEventListener("change", () => {
+            const isAttending = input.value === "yes";
+            entreeField.hidden = !isAttending;
+            nameField.hidden = !isAttending;
+            if (!isAttending) {
+                entreeSelect.value = "";
+                nameInput.value = "";
+            }
+        });
+    });
+
+    return article;
+}
+
 function renderPartyForm() {
     elements.members.innerHTML = "";
     state.party.members.forEach((member) => {
         elements.members.append(buildMember(member));
     });
+    if (state.party.plusOneAllowed) {
+        elements.members.append(buildPlusOne(state.party.plusOne || { attending: null, name: "", entreeChoice: "" }));
+    }
     elements.formPartyCopy.textContent = `Reply for ${state.party.displayName}. Any previous response is already filled in so updating later stays simple.`;
 }
 
@@ -206,7 +316,7 @@ elements.lookupForm.addEventListener("submit", async (event) => {
     const lastInitial = elements.lookupLastInitial.value.trim();
 
     if (!firstName || !lastInitial) {
-        setMessage(elements.lookupMessage, "Please enter both your first name and last initial.", "error");
+        setMessage(elements.lookupMessage, "Please enter a first name or nickname and a last initial.", "error");
         return;
     }
 
@@ -220,7 +330,7 @@ elements.lookupForm.addEventListener("submit", async (event) => {
         });
 
         if (!result.found || !result.party) {
-            setMessage(elements.lookupMessage, "We could not find a matching invitation with that information. Please try again.", "error");
+            setMessage(elements.lookupMessage, result.error || "We could not find a matching invitation with that information. Please try again.", "error");
             return;
         }
 
@@ -273,13 +383,37 @@ elements.form.addEventListener("submit", async (event) => {
         };
     });
 
+    let plusOne = null;
+    if (state.party.plusOneAllowed) {
+        const plusOneAttendingInput = elements.form.querySelector('input[name="plus-one-attending"]:checked');
+        const plusOneEntreeInput = elements.form.querySelector('select[name="plus-one-entree"]');
+        const plusOneNameInput = elements.form.querySelector('input[name="plus-one-name"]');
+        const attending = plusOneAttendingInput ? plusOneAttendingInput.value === "yes" : null;
+
+        plusOne = {
+            attending,
+            entreeChoice: attending ? plusOneEntreeInput.value : "",
+            name: attending ? plusOneNameInput.value.trim() : ""
+        };
+    }
+
     if (members.some((member) => member.attending === null)) {
         setMessage(elements.formMessage, "Please choose attending or not attending for each invited guest.", "error");
         return;
     }
 
+    if (state.party.plusOneAllowed && plusOne.attending === null) {
+        setMessage(elements.formMessage, "Please choose attending or not attending for your guest.", "error");
+        return;
+    }
+
     if (members.some((member) => member.attending && !member.entreeChoice)) {
         setMessage(elements.formMessage, "Please choose an entree for each attending guest.", "error");
+        return;
+    }
+
+    if (state.party.plusOneAllowed && plusOne.attending && !plusOne.entreeChoice) {
+        setMessage(elements.formMessage, "Please choose an entree for your attending guest.", "error");
         return;
     }
 
@@ -289,7 +423,8 @@ elements.form.addEventListener("submit", async (event) => {
     try {
         await postJson("/.netlify/functions/update-rsvp", {
             token: state.token,
-            members
+            members,
+            plusOne
         });
 
         elements.successCopy.textContent = `Your RSVP has been recorded for ${state.party.displayName}. If your plans change later, you can return here and update your responses with the same lookup.`;
