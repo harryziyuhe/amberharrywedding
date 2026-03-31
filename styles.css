@@ -948,6 +948,10 @@ p {
     padding-bottom: 0;
 }
 
+.rsvp-member--plus-one {
+    margin-top: 8px;
+}
+
 .rsvp-member-header {
     margin-bottom: 18px;
 }
@@ -1001,6 +1005,10 @@ p {
 }
 
 .rsvp-entree[hidden] {
+    display: none;
+}
+
+.rsvp-plus-one-name[hidden] {
     display: none;
 }
 
