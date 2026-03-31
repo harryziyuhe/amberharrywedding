@@ -95,12 +95,13 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - RSVP page:
   - Add a dedicated `rsvp.html` page in the same editorial style as the rest of the site
   - Use a single-page guest flow:
-    * lookup by first name and last initial
+    * lookup by first name or nickname and last initial
     * confirmation state showing the matched party name
     * party-based RSVP form on the same page
     * clear success state after save
   - Prefill existing RSVP values when a party is loaded so guests can update later using the same lookup
   - For each invited party member, allow attending yes/no and show entree choices only when attending is yes
+  - Allow some parties to RSVP for one optional unnamed guest, with a separate plus-one section that can collect attendance, optional guest name, and entree choice
   - Keep the page centered, refined, and minimal rather than app-like or administrative
   - Back the page with two Netlify Functions and a lightweight hosted data layer using Supabase
   - Preserve privacy by exposing only the matched party after exact lookup and never exposing the full guest list or contact data
@@ -111,8 +112,8 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - On desktop, the full inline nav remains visible
 - On narrow viewports, the navbar collapses to the brand and a hamburger toggle; clicking the toggle reveals a dropdown list of the existing navigation links and changes the icon to an `X`
 - The site includes a single `RSVP` page backed by Netlify Functions rather than per-guest pages or client-side database access
-- RSVP lookup requires `firstName` and `lastInitial`, is case-insensitive, and reveals only the matched party after a successful lookup
-- RSVP updates are party-based, support later edits, and keep entree choices conditional on attendance
+- RSVP lookup requires `firstName` and `lastInitial`, is case-insensitive, accepts either a first name or nickname for any invited member in the matched party, and reveals only the matched party after a successful lookup
+- RSVP updates are party-based, support later edits, keep entree choices conditional on attendance, and optionally include one party-level plus-one slot when allowed
 - `Things to Do` is the only page with a widened two-column content region below the top image
 - `Things to Do` uses `Leaflet` with `CARTO Light` for a free embedded map
 - The `Things to Do` page uses one page-level scroll, keeps the map sticky on desktop while the section is in view, reserves a placeholder photo slot on every card, updates both the card list and pins by category, animates the hovered pin with a slower lighter hop without showing a label or tooltip, never moves the map automatically, and exposes a reset-view control when the guest manually changes center or zoom
@@ -137,7 +138,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
-- Confirm the RSVP requirements explicitly mention single-page lookup by first name and last initial, confirmation before form reveal, party-based updates, conditional entree fields, later edits, Netlify Functions, Supabase, and lightweight privacy constraints
+- Confirm the RSVP requirements explicitly mention single-page lookup by first name or nickname and last initial for any invited member in a party, confirmation before form reveal, party-based updates, conditional entree fields, optional party-level plus-one support, later edits, Netlify Functions, Supabase, and lightweight privacy constraints
 - Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, a single page-level scroll, a sticky map on desktop, placeholder photo slots on every card, `Leaflet` with `CARTO Light`, category-colored pins, slower hover hopping with slightly lighter active color, no automatic map motion, the conditional reset-view control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
 - Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS for filtering and page-specific map behavior
