@@ -96,7 +96,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
   - Add a dedicated `rsvp.html` page in the same editorial style as the rest of the site
   - Use a single-page guest flow:
     * lookup by first name or nickname and last initial
-    * confirmation state showing the matched party name
+    * immediate form reveal for the matched party
     * party-based RSVP form on the same page
     * clear success state after save
   - Prefill existing RSVP values when a party is loaded so guests can update later using the same lookup
@@ -138,7 +138,7 @@ This site is a multi-page editorial wedding website built as static HTML and CSS
 - Confirm `PLAN.md` documents the new page photography and explicitly excludes `Torrey Pines_V.png`
 - Confirm `PLAN.md` documents the current image refinements: natural image height and a shared compact but aggressive gradient-based transition for white-fade image edges
 - Confirm the Schedule requirements explicitly include title/time on the left and venue, address, Google Maps link, and note on the right
-- Confirm the RSVP requirements explicitly mention single-page lookup by first name or nickname and last initial for any invited member in a party, confirmation before form reveal, party-based updates, conditional entree fields, optional party-level plus-one support, later edits, Netlify Functions, Supabase, and lightweight privacy constraints
+- Confirm the RSVP requirements explicitly mention single-page lookup by first name or nickname and last initial for any invited member in a party, immediate form reveal after a successful match, party-based updates, conditional entree fields, optional party-level plus-one support, later edits, Netlify Functions, Supabase, and lightweight privacy constraints
 - Confirm the Things to Do requirements explicitly mention the widened desktop map/list layout, a single page-level scroll, a sticky map on desktop, placeholder photo slots on every card, `Leaflet` with `CARTO Light`, category-colored pins, slower hover hopping with slightly lighter active color, no automatic map motion, the conditional reset-view control, mobile map hiding, and the updated San Diego destination list under `Eat & Drink`, `Fun`, and `Nature`
 - Confirm the FAQ requirements explicitly mention foldable collapsed-by-default rows, the right-aligned `<` toggle, `Black Tie` dress code, and guest logistics topics such as arrival timing, rideshare, and parking
 - Confirm the assumptions still match the implementation: static HTML/CSS, inline SVG and CSS-driven visuals, and minimal vanilla JS for filtering and page-specific map behavior
