@@ -16,11 +16,6 @@ const elements = {
     lookupMessage: document.getElementById("lookup-message"),
     lookupSubmit: document.getElementById("lookup-submit"),
     lookupStep: document.getElementById("rsvp-step-lookup"),
-    confirmStep: document.getElementById("rsvp-step-confirm"),
-    confirmButton: document.getElementById("confirm-party-button"),
-    searchAgainButton: document.getElementById("search-again-button"),
-    confirmPartyName: document.getElementById("rsvp-party-name"),
-    confirmPartySummary: document.getElementById("rsvp-party-summary"),
     formStep: document.getElementById("rsvp-step-form"),
     formPartyCopy: document.getElementById("rsvp-form-party-copy"),
     form: document.getElementById("rsvp-form"),
@@ -44,7 +39,6 @@ function setMessage(node, text, tone) {
 function showStep(stepName) {
     const steps = {
         lookup: elements.lookupStep,
-        confirm: elements.confirmStep,
         form: elements.formStep,
         success: elements.successStep
     };
@@ -336,9 +330,8 @@ elements.lookupForm.addEventListener("submit", async (event) => {
 
         state.party = result.party;
         state.token = result.updateToken;
-        elements.confirmPartyName.textContent = result.party.displayName;
-        elements.confirmPartySummary.textContent = describeParty(result.party);
-        showStep("confirm");
+        renderPartyForm();
+        showStep("form");
     } catch (error) {
         setMessage(elements.lookupMessage, error.message, "error");
     } finally {
@@ -346,18 +339,6 @@ elements.lookupForm.addEventListener("submit", async (event) => {
         elements.lookupSubmit.textContent = "Find My Invitation";
     }
 });
-
-elements.confirmButton.addEventListener("click", () => {
-    if (!state.party) {
-        return;
-    }
-
-    renderPartyForm();
-    setMessage(elements.formMessage, "", null);
-    showStep("form");
-});
-
-elements.searchAgainButton.addEventListener("click", resetExperience);
 elements.editSearchButton.addEventListener("click", resetExperience);
 elements.submitAnotherButton.addEventListener("click", resetExperience);
 
